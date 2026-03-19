@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Download, Smartphone, Monitor, Briefcase, Plus, ArrowLeft, Camera } from "lucide-react";
+import { Download, Smartphone, Monitor, Briefcase, Plus, ArrowLeft, Camera, Users, Award, TrendingUp, BookOpen, MessageCircle } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 import { Toaster, toast } from "sonner";
 
@@ -15,9 +15,10 @@ const InstallPrompt = ({
 }) => {
   return (
     <div className="min-h-screen bg-white dark:bg-black flex flex-col items-center justify-center p-6 relative overflow-hidden">
+      
       <div className="absolute top-0 left-0 w-full h-80 bg-gradient-to-b from-gray-100 to-white dark:from-gray-900 dark:to-black -z-10 rounded-b-[60px]" />
-
-      <motion.div
+      
+      <motion.div 
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
@@ -33,14 +34,15 @@ const InstallPrompt = ({
           <Briefcase className="text-white w-12 h-12" />
         </div>
 
-        <h1 className="text-3xl font-extrabold text-black dark:text-white mb-4 tracking-tight">
-          Digital Business Strategy Hub
+        <h1 className="text-3xl font-extrabold text-black dark:text-white mb-4 tracking-tight px-4 leading-tight">
+          Digital Business Digital Hub
         </h1>
 
-        <p className="text-gray-500 dark:text-gray-400 mb-12 text-lg">
+        <p className="text-gray-500 dark:text-gray-400 mb-12 text-lg leading-relaxed px-2">
           Access your investor manuals and business guides instantly.
         </p>
 
+        {/* ✅ CTA BUTTON */}
         <motion.button
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.95 }}
@@ -57,15 +59,50 @@ const InstallPrompt = ({
           )}
         </motion.button>
 
-        <p className="mt-8 text-sm text-gray-400 font-medium">
-          Install for offline access
-        </p>
+        {/* ✅ SHOW ONLY IF NOT INSTALLED */}
+        {!isStandalone && (
+          <p className="mt-8 text-sm text-gray-400 font-medium">
+            Install for offline access
+          </p>
+        )}
       </motion.div>
     </div>
   );
 };
+
 // 2. Main App Screen (Strategy Hub)
 const StrategyHub = ({ onGoBack }: { onGoBack: () => void }) => {
+  const topCards = [
+    {
+      id: 1,
+      title: "Who Are We?",
+      icon: <Users className="w-7 h-7 text-red-600" />,
+      description: "Learn about our organization and mission.",
+      fileSize: "1.2 MB"
+    },
+    {
+      id: 2,
+      title: "Digital Snapshot",
+      icon: <Camera className="w-7 h-7 text-red-600" />,
+      description: "Overview of our digital business landscape.",
+      fileSize: "3.2 MB"
+    },
+    {
+      id: 3,
+      title: "External Recognition",
+      icon: <Award className="w-7 h-7 text-red-600" />,
+      description: "Performance metrics and recognition programs.",
+      fileSize: "2.1 MB"
+    },
+    {
+      id: 4,
+      title: "Year of Scale & Momentum",
+      icon: <TrendingUp className="w-7 h-7 text-red-600" />,
+      description: "Growth strategies and momentum initiatives.",
+      fileSize: "2.8 MB"
+    }
+  ];
+
   const manuals = [
     {
       id: 1,
@@ -80,14 +117,24 @@ const StrategyHub = ({ onGoBack }: { onGoBack: () => void }) => {
       title: "Investor App Manual",
       icon: <Smartphone className="w-7 h-7 text-red-600" />,
       description: "Mobile application usage and features documentation.",
-      fileSize: "1.8 MB"
+      fileSize: "1.8 MB",
+      link: "https://nipponindiaim-my.sharepoint.com/:b:/p/ann_renny/IQDt4IYkaMrpRabYeE8xzok1Affe8K-hwObYn0b6AekN4CI?e=NQfeLB"
     },
     {
       id: 3,
       title: "Business Easy Manual",
       icon: <Briefcase className="w-7 h-7 text-red-600" />,
       description: "Simplified strategies for business operations.",
-      fileSize: "3.1 MB"
+      fileSize: "3.1 MB",
+      link: "https://nipponindiaim-my.sharepoint.com/:b:/p/anna_sangma/IQALdTMtyHBkQb_jo-B1VgfHAUk_NofPa8wXGcf9ZNPD3AA?e=PqINPR"
+    },
+    {
+      id: 4,
+      title: "WhatsApp for Investors",
+      icon: <MessageCircle className="w-7 h-7 text-red-600" />,
+      description: "Connect with investors through WhatsApp.",
+      fileSize: "1.5 MB",
+      link: "https://nipponindiaim-my.sharepoint.com/:b:/p/ann_renny/IQAv6UqYKQ9kSofWZVz4RI7_AWolWrn7Q1r9sEyjJpVqn8I?e=Yaf2Eu"
     }
   ];
 
@@ -103,6 +150,7 @@ const StrategyHub = ({ onGoBack }: { onGoBack: () => void }) => {
   };
 
   return (
+    
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex flex-col relative">
       
       {/* Header */}
@@ -128,51 +176,57 @@ const StrategyHub = ({ onGoBack }: { onGoBack: () => void }) => {
       {/* Main Content */}
       <main className="flex-1 w-full p-6 overflow-y-auto pb-20 max-w-2xl mx-auto">
         
-        {/* Digital Business Snapshot */}
+        {/* Top Cards Section */}
         <div className="mb-8">
-          <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Digital Business Snapshot</h3>
+          <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">NAMI's Digital Business</h3>
           
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            onClick={() => handleDownload({ title: "Digital Business Snapshot" })}
-            className="bg-white dark:bg-gray-950 p-5 rounded-2xl shadow-sm dark:shadow-gray-800/50 border border-gray-100 dark:border-gray-800 active:scale-[0.97] transition-transform cursor-pointer relative overflow-hidden group"
-          >
-            <div className="absolute top-0 right-0 w-20 h-20 bg-red-50 dark:bg-red-950/30 rounded-bl-[50px] -mr-6 -mt-6 transition-transform group-hover:scale-110" />
-            
-            <div className="relative z-10 flex items-start gap-4">
-              <div className="p-3 bg-red-50 dark:bg-red-950/30 rounded-xl shrink-0 group-hover:bg-red-100 dark:group-hover:bg-red-900/40 transition-colors">
-                <Camera className="w-7 h-7 text-red-600" />
-              </div>
-              <div className="flex-1 pt-1">
-                <h4 className="font-bold text-gray-900 dark:text-white text-lg leading-tight mb-2 group-hover:text-red-600 dark:group-hover:text-red-500 transition-colors">Digital Business Snapshot</h4>
-                <div className="flex items-center gap-3">
-                  <span className="text-xs font-bold bg-gray-100 dark:bg-gray-800 text-gray-500 dark:text-gray-400 px-2 py-1 rounded-md">PDF</span>
-                  <span className="text-xs text-gray-400 dark:text-gray-500">3.2 MB</span>
+          <div className="flex flex-col gap-5">
+            {topCards.map((card) => (
+              <motion.div
+                key={card.id}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: card.id * 0.1 }}
+                onClick={() => handleDownload({ title: card.title })}
+                className="bg-white dark:bg-gray-950 p-5 rounded-2xl shadow-sm dark:shadow-gray-800/50 border border-gray-100 dark:border-gray-800 active:scale-[0.97] transition-transform cursor-pointer relative overflow-hidden group"
+              >
+                <div className="absolute top-0 right-0 w-20 h-20 bg-red-50 dark:bg-red-950/30 rounded-bl-[50px] -mr-6 -mt-6 transition-transform group-hover:scale-110" />
+                
+                <div className="relative z-10 flex items-start gap-4">
+                  <div className="p-3 bg-red-50 dark:bg-red-950/30 rounded-xl shrink-0 group-hover:bg-red-100 dark:group-hover:bg-red-900/40 transition-colors">
+                    {card.icon}
+                  </div>
+                  <div className="flex-1 pt-1">
+                    <h4 className="font-bold text-gray-900 dark:text-white text-lg leading-tight mb-2 group-hover:text-red-600 dark:group-hover:text-red-500 transition-colors">{card.title}</h4>
+                    <div className="flex items-center gap-3">
+                      <span className="text-xs font-bold bg-gray-100 dark:bg-gray-800 text-gray-500 dark:text-gray-400 px-2 py-1 rounded-md">PDF</span>
+                      <span className="text-xs text-gray-400 dark:text-gray-500">{card.fileSize}</span>
+                    </div>
+                  </div>
+                  <div className="self-center">
+                    <div className="w-10 h-10 rounded-full bg-gray-50 dark:bg-gray-800 border border-gray-100 dark:border-gray-700 flex items-center justify-center text-gray-400 dark:text-gray-500 group-hover:bg-red-600 group-hover:text-white group-hover:border-red-600 dark:group-hover:border-red-600 transition-all shadow-sm">
+                      <Download className="w-5 h-5" strokeWidth={2.5} />
+                    </div>
+                  </div>
                 </div>
-              </div>
-              <div className="self-center">
-                <div className="w-10 h-10 rounded-full bg-gray-50 dark:bg-gray-800 border border-gray-100 dark:border-gray-700 flex items-center justify-center text-gray-400 dark:text-gray-500 group-hover:bg-red-600 group-hover:text-white group-hover:border-red-600 dark:group-hover:border-red-600 transition-all shadow-sm">
-                  <Download className="w-5 h-5" strokeWidth={2.5} />
-                </div>
-              </div>
-            </div>
-          </motion.div>
+              </motion.div>
+            ))}
+          </div>
         </div>
 
+        {/* Know your Digital Platform Section */}
         <div className="mb-8">
-            <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">Downloads</h3>
+            <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">Know your Digital Platform(KYDP)</h3>
             <p className="text-gray-500 dark:text-gray-400">Select a manual to start downloading.</p>
         </div>
 
         <div className="flex flex-col gap-5">
-          {manuals.map((manual) => (
+          {manuals.map((manual, index) => (
             <motion.div
               key={manual.id}
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: manual.id * 0.1 }}
+              transition={{ delay: (topCards.length + index) * 0.1 }}
               onClick={() => handleDownload(manual)}
               className="bg-white dark:bg-gray-950 p-5 rounded-2xl shadow-sm dark:shadow-gray-800/50 border border-gray-100 dark:border-gray-800 active:scale-[0.97] transition-transform cursor-pointer relative overflow-hidden group"
             >
@@ -223,16 +277,17 @@ export default function App() {
     setIsIOS(ios);
 
     const standalone =
-  window.matchMedia("(display-mode: standalone)").matches ||
-  (window.navigator as any).standalone === true;
+      window.matchMedia("(display-mode: standalone)").matches ||
+      (window.navigator as any).standalone === true;
 
-setIsStandalone(standalone);
+    setIsStandalone(standalone);
 
-// 🔥 auto open dashboard if launched from installed app
-if (standalone) {
-  setIsInstalled(true);
-}
+    // 🔥 If app opened from home screen → go to dashboard
+    if (standalone) {
+      setIsInstalled(true);
+    }
 
+    // 🔥 Capture install prompt (Android/Chrome)
     const handler = (e: any) => {
       e.preventDefault();
       setDeferredPrompt(e);
@@ -251,31 +306,32 @@ if (standalone) {
   }, []);
 
   const handleInstallClick = async () => {
-
-  // 🔥 If already installed → open dashboard
-  if (isStandalone) {
-    setIsInstalled(true);
-    return;
-  }
-
-  // iOS manual install
-  if (isIOS) {
-    toast.message("To install: Tap Share → Add to Home Screen");
-    return;
-  }
-
-  // Chrome / Android install
-  if (deferredPrompt) {
-    deferredPrompt.prompt();
-    const { outcome } = await deferredPrompt.userChoice;
-
-    if (outcome === "accepted") {
+    // ✅ If already installed → open dashboard
+    if (isStandalone) {
       setIsInstalled(true);
+      return;
     }
 
-    setDeferredPrompt(null);
-  }
-};
+    // 🍎 iOS (no install prompt)
+    if (isIOS) {
+      toast.message("To install: Tap Share → Add to Home Screen");
+      return;
+    }
+
+    // 🤖 Android / Chrome install
+    if (deferredPrompt) {
+      deferredPrompt.prompt();
+      const { outcome } = await deferredPrompt.userChoice;
+
+      if (outcome === "accepted") {
+        setIsInstalled(true);
+      }
+
+      setDeferredPrompt(null);
+    } else {
+      toast.message("Install not available yet. Try in Chrome.");
+    }
+  };
 
   const handleGoBack = () => {
     setIsInstalled(false);
@@ -294,7 +350,10 @@ if (standalone) {
             exit={{ opacity: 0, scale: 0.95 }}
             transition={{ duration: 0.3 }}
           >
-            <InstallPrompt onInstall={handleInstallClick} isStandalone={isStandalone} />
+            <InstallPrompt 
+        onInstall={handleInstallClick} 
+        isStandalone={isStandalone} 
+      />
           </motion.div>
         ) : (
           <motion.div
