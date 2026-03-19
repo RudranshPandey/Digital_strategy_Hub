@@ -4,4 +4,4 @@ dist/
 ./dist
 .env
 .DS_Store
-.vit
+.vite
